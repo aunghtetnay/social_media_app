@@ -50,21 +50,14 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY --from=composer:2.4.4 /usr/bin/composer /usr/bin/composer
 
-# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-# RUN composer install --prefer-dist --no-dev --no-scripts --no-progress --no-interaction
-
-# RUN composer dump-autoload --optimize
-
-# Create system user to run Composer and Artisan Commands
-# RUN addgroup -g 82 www-data \
-#     && addgroup -g 0 root \
-#     && adduser -G www-data,root -u $uid -h /home/$user -D $user
-
-# RUN mkdir -p /home/$user/.composer && \
-#     chown -R $user:$user /home/$user
-# Set working directory
 RUN docker-php-ext-install pdo pdo_mysql
 
 WORKDIR /var/www
+COPY . /var/www
 
-USER $user
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R 755 /var/www/storage
+RUN chmod -R 755 /var/www/bootstrap/cache
+
+RUN adduser -D -u 1000 hanchothar
+USER hanchothar
