@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('likes', function (Blueprint $table) {
-            $table->uuid();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->uuid('id');
+            $table->uuid('user_id');
+            $table->uuid('post_id');
             $table->softDeletes('deleted_at');
             $table->timestamps();
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 

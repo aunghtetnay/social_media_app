@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->uuid();
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->uuid('id');
+            $table->uuid('post_id');
+            $table->uuid('user_id');
             $table->uuid('lookup_id')->nullable();
             $table->text('contents');
             $table->softDeletes('deleted_at');
             $table->timestamps();
+            // $table->foreign('post_id')->references('id')->on('posts');
+            // $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
