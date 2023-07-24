@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->enum('system_status', ['active', 'inactive', 'deleted', 'blocked']);
-            $table->uuid('profile_image_id');
+            $table->uuid('profile_image_id')->nullable();
             $table->softDeletes('deleted_at');
             $table->timestamps();
             // $table->foreign('profile_image_id')->references('id')->on('images')->onDelete('cascade');
