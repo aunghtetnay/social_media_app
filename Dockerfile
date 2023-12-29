@@ -1,4 +1,5 @@
 FROM alpine:3.18.4
+MAINTAINER aunghtetnay.x@gmail.com 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 # Setup document root
 WORKDIR /var/www/html
